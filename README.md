@@ -1,4 +1,4 @@
-# omniauth-gitbook
+# omniauth-gitbook ![](https://travis-ci.org/Calvin-Huang/omniauth-gitbook.svg?branch=master) ![gem](https://img.shields.io/badge/gem-1.0.0-red.svg)
 Gitbook Oauth2 strategy for Omniauth.
  
  ## Usage - OmniAuth
