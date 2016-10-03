@@ -11,6 +11,10 @@ module OmniAuth
           token_url: "#{base_url}/oauth/access_token",
       }
 
+      option :token_params, {
+          grant_type: 'authorization_code'
+      }
+
       uid { raw_info['id'].to_s }
 
       info do
