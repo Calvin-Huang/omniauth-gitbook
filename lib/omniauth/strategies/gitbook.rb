@@ -11,10 +11,6 @@ module OmniAuth
           token_url: "#{base_url}/oauth/access_token",
       }
 
-      option :token_params, {
-          grant_type: 'authorization_code'
-      }
-
       uid { raw_info['id'].to_s }
 
       info do
@@ -29,12 +25,15 @@ module OmniAuth
       end
 
       extra do
-        { raw_info: raw_info }
+        { raw_info: raw_info, books: books }
       end
 
       def raw_info
-        access_token.options[:mode] = :query
         @raw_info ||= access_token.get('account').parsed
+      end
+
+      def books
+        @books ||= access_token.get('books').parsed
       end
 
       def authorize_params
