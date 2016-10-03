@@ -5,7 +5,6 @@ module OmniAuth
     class GitBook < OmniAuth::Strategies::OAuth2
       base_url = 'https://api.gitbook.com'
 
-      option :name, 'GitBook'
       option :client_options, {
           site: base_url,
           authorize_url: "#{base_url}/oauth/authorize",
@@ -16,8 +15,12 @@ module OmniAuth
 
       info do
         {
+            'username' => raw_info['username'],
             'name' => raw_info['name'],
-            'website' => raw_info['website']
+            'website' => raw_info['website'],
+            'urls' => raw_info['urls'],
+            'auth' => raw_info['auth'],
+            'token' => raw_info['token'],
         }
       end
 
@@ -27,7 +30,7 @@ module OmniAuth
 
       def raw_info
         access_token.options[:mode] = :query
-        @raw_info ||= access_token
+        @raw_info ||= access_token.get('account').parsed
       end
 
       def authorize_params
